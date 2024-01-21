@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "outDir": "dist/",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ES2022",
+    "sourceMap": true,
+    "paths": {
+      "#apiRequests": ["apiRequests"],
+      "#apiRequests/*": ["apiRequests/*"],
+      "#controllers": ["controllers"],
+      "#controllers/*": ["controllers/*"],
+      "#configs": ["configs"],
+      "#configs/*": ["configs/*"],
+      "#middlewares": ["middlewares"],
+      "#middlewares/*": ["middlewares/*"],
+      "#routes": ["routes"],
+      "#routes/*": ["routes/*"],
+      "#utils": ["utils"],
+      "#utils/*": ["utils/*"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "ts-node": {
+    "swc": true
+  }
+}
