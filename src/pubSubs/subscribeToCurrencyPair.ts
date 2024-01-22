@@ -17,7 +17,7 @@ export async function subscribeToCurrencyPair(
     connectionSubscription.add(currencyPair);
 
     PubSub.subscribe(currencyPair, (topic, price) => {
-      ws.send(`${topic}: ${price}`);
+      ws.send(JSON.stringify({ topic, price }));
     });
 
     logger.debug(`connection(${connectionID}) subscribe to ${currencyPair}`);
