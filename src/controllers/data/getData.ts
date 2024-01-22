@@ -10,11 +10,16 @@ export async function getData(req: Request, res: Response): Promise<void> {
       res.status(400).json({ errors: ['invalid user'] });
       return;
     }
-    logger.info(`${userID}`);
 
     const stories = await topStories.getTopStories();
 
     if (!stories) {
+      res.sendStatus(500);
+      return;
+    }
+
+    if (!Array.isArray(stories)) {
+      logger.warn('invalid top stories.');
       res.sendStatus(500);
       return;
     }

@@ -1,1 +1,1 @@
-export * from './bitmap';
+export * from './bitstamp';
