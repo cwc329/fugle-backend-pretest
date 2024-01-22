@@ -14,6 +14,7 @@ app.use(morgan(logFormat));
 app.use('/data', data);
 
 const main = async () => {
+  logger.info('Initializing server...');
   await redisClient.connect();
   server.listen(port, () => {
     logger.info(`ready on http://localhost:${port}`);

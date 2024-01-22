@@ -23,6 +23,10 @@
       "#middlewares/*": ["middlewares/*"],
       "#routes": ["routes"],
       "#routes/*": ["routes/*"],
+      "#websocketClients": ["websocketClients"],
+      "#websocketClients/*": ["websocketClients/*"],
+      "#websockets": ["websockets"],
+      "#websockets/*": ["websockets/*"],
       "#utils": ["utils"],
       "#utils/*": ["utils/*"]
     }

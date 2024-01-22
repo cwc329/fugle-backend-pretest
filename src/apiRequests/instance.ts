@@ -1,5 +1,6 @@
 import axios from 'axios';
+import { api } from '#configs';
 
 export const hackerNewsInstance = axios.create({
-  baseURL: 'https://hacker-news.firebaseio.com/v0',
+  baseURL: api.hackNewsUrl,
 });
