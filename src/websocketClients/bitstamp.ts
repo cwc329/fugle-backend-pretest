@@ -8,7 +8,7 @@ import { BitstampWebsocketMessage } from './types';
 
 let bitmapWebsocketClient: WebSocket;
 
-async function connectBitmapWebsocket() {
+async function connectBitstampWebsocket() {
   return new Promise<WebSocket>((resolve, reject) => {
     bitmapWebsocketClient = new WebSocket(websocket.bitstampWebsocketUrl);
     bitmapWebsocketClient
@@ -53,7 +53,7 @@ async function connectBitmapWebsocket() {
   });
 }
 
-export async function getBitmapWebsocketClient() {
+export async function getBitstampWebsocketClient() {
   if (bitmapWebsocketClient) return bitmapWebsocketClient;
-  return connectBitmapWebsocket();
+  return connectBitstampWebsocket();
 }

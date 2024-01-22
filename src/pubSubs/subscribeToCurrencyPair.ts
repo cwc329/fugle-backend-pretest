@@ -1,6 +1,6 @@
 import type WebSocket from 'ws';
 import PubSub from 'pubsub-js';
-import { getBitmapWebsocketClient } from '#websocketClients';
+import { getBitstampWebsocketClient } from '#websocketClients';
 import { currencyPairSubscription, logger } from '#utils';
 
 export async function subscribeToCurrencyPair(
@@ -13,7 +13,7 @@ export async function subscribeToCurrencyPair(
   if (!connectionSubscription) return;
 
   if (connectionSubscription.size < subscribeLimit && !connectionSubscription.has(currencyPair)) {
-    const bitstampClient         = await getBitmapWebsocketClient();
+    const bitstampClient         = await getBitstampWebsocketClient();
     connectionSubscription.add(currencyPair);
 
     PubSub.subscribe(currencyPair, (topic, price) => {
