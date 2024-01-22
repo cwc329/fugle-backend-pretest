@@ -54,7 +54,8 @@
     "#middlewares": "./dist/middlewares/index.js",
     "#pubSubs": "./dist/pubSubs/index.js",
     "#routes": "./dist/routes/index.js",
-    "#websocketClients": "./dist/websocketClients/index.js",
-    "#utils": "./dist/utils/index.js"
+    "#types": "./dist/routes/index.js",
+    "#utils": "./dist/utils/index.js",
+    "#websocketClients": "./dist/websocketClients/index.js"
   }
 }

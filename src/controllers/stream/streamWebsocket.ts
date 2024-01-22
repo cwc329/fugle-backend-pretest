@@ -2,7 +2,13 @@ import type { Request } from 'express';
 import PubSub from 'pubsub-js';
 import type WebSocket from 'ws';
 import { subscribeToCurrencyPair, unsubscribeToCurrencyPair } from '#pubSubs';
-import { currencyPairSubscription, logger, safeJSONParse } from '#utils';
+import {
+  currencyPairSubscription,
+  logger,
+  redisClient,
+  safeJSONParse,
+} from '#utils';
+import { ohlc } from '#apiRequests';
 
 export async function streamWebsocket(ws: WebSocket, req: Request) {
   const connectionID = req.headers['sec-websocket-key'];
@@ -45,6 +51,31 @@ export async function streamWebsocket(ws: WebSocket, req: Request) {
       case 'unsubscribe':
         await unsubscribeToCurrencyPair(currencyPair, connectionID, ws);
         break;
+      case 'ohlc': {
+        const currentTime = (new Date()).setSeconds(0, 0) / 1000;
+        const cacheKey    = `ohlc:${currencyPair}:${currentTime}`;
+        const ohclCache   = await redisClient.get(cacheKey);
+        if (ohclCache) {
+          ws.send(ohclCache);
+          return;
+        }
+        const res = await ohlc.getOHLC(currencyPair);
+        if (!res) {
+          ws.send(JSON.stringify({ event: 'ohlc', message: 'server error' }));
+          break;
+        }
+        const ohcl           = res.data.ohlc[0];
+        const ohclJSONString = JSON.stringify(ohcl);
+        await redisClient.set(
+          `ohlc:${currencyPair}:${ohcl.timestamp}`,
+          ohclJSONString,
+          {
+            EX: 15 * 60,
+          },
+        );
+        ws.send(ohclJSONString);
+        break;
+      }
       default:
     }
   });

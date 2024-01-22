@@ -26,12 +26,14 @@
       "#pubSubs/*": ["pubSubs/*"],
       "#routes": ["routes"],
       "#routes/*": ["routes/*"],
+      "#types": ["types"],
+      "#types/*": ["types/*"],
       "#websocketClients": ["websocketClients"],
       "#websocketClients/*": ["websocketClients/*"],
-      "#websockets": ["websockets"],
-      "#websockets/*": ["websockets/*"],
       "#utils": ["utils"],
-      "#utils/*": ["utils/*"]
+      "#utils/*": ["utils/*"],
+      "#websockets": ["websockets"],
+      "#websockets/*": ["websockets/*"]
     }
   },
   "include": [

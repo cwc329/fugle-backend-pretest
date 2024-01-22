@@ -16,7 +16,6 @@ async function connectBitmapWebsocket() {
         logger.error(error);
         reject(error);
       })
-      // TODO: refactor this, add this listener only when needed
       .on('message', async (message) => {
         const rawMessage = message.toString('utf-8');
         const messageJSON = plainToInstance(BitstampWebsocketMessage, JSON.parse(rawMessage));
