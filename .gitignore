@@ -11,3 +11,5 @@ build/
 .yarnrc
 
 yarn-error.log
+
+poc.ts
