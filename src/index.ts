@@ -1,18 +1,22 @@
 import { createServer } from 'node:http';
 import express from 'express';
 import morgan from 'morgan';
+import * as config from '#configs';
 import { data } from '#routes';
-import { logger } from '#utils';
+import { logger, redisClient } from '#utils';
+
+const { logFormat, port } = config.app;
 
 const app    = express();
 const server = createServer(app);
 
-app.use(morgan('dev'));
+app.use(morgan(logFormat));
 app.use('/data', data);
 
-const main = () => {
-  server.listen(3000, () => {
-    logger.info(`ready on http://localhost:${3000}`);
+const main = async () => {
+  await redisClient.connect();
+  server.listen(port, () => {
+    logger.info(`ready on http://localhost:${port}`);
   });
 };
 
